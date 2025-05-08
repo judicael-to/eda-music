@@ -1,5 +1,32 @@
 """
 Module de visualisation pour l'analyse de données Spotify et autres datasets
+
+Ce module fournit des fonctions spécialisées pour créer des visualisations
+de haute qualité adaptées à l'analyse des données musicales de Spotify.
+
+Principales fonctions de visualisation:
+- spotify_feature_distribution: Visualise la distribution d'une caractéristique audio
+- spotify_correlation_heatmap: Crée une matrice de corrélation pour les caractéristiques audio
+- spotify_genre_comparison: Compare une caractéristique audio entre différents genres
+- spotify_artist_popularity_viz: Visualise les artistes les plus populaires et leurs statistiques
+- temporal_analysis_plot: Analyse l'évolution temporelle des caractéristiques audio
+- popularity_vs_feature_scatter: Crée un nuage de points entre popularité et caractéristique audio
+- create_report_figures: Génère un ensemble complet de visualisations pour un rapport
+
+Chaque fonction est conçue pour être utilisée individuellement ou dans le cadre
+d'un flux d'analyse plus large. Le module gère automatiquement les paramètres 
+esthétiques pour assurer des visualisations cohérentes et attrayantes.
+
+Utilisation typique:
+    from src.data.load_data import load_spotify
+    from src.visualization.visualize import spotify_correlation_heatmap
+    
+    # Charger les données
+    df = load_spotify()
+    
+    # Créer une visualisation
+    fig = spotify_correlation_heatmap(df)
+    plt.show()
 """
 
 import pandas as pd

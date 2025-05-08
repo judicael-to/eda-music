@@ -1,6 +1,6 @@
-# Projet d'Analyse Exploratoire de Données
+# Projet d'Analyse Exploratoire de Données Musicales
 
-Ce projet fournit un framework complet pour réaliser des analyses exploratoires de données (EDA) sur des datasets publics ou personnels, en utilisant Python avec pandas, matplotlib et seaborn.
+Ce projet fournit un framework complet pour réaliser des analyses exploratoires de données (EDA) sur des datasets musicaux, notamment Spotify, en utilisant Python avec pandas, matplotlib et seaborn.
 
 ## 🌟 Fonctionnalités
 
@@ -12,7 +12,15 @@ Ce framework d'analyse exploratoire permet de :
 - Calculer et visualiser des matrices de corrélation
 - Tester la normalité des distributions
 - Analyser des séries temporelles (si applicable)
-- **NOUVEAU** : Analyser les données musicales de Spotify (caractéristiques audio, popularité, genres)
+- **Spécialisation Spotify** : Analysez en profondeur les données musicales (caractéristiques audio, popularité, genres)
+
+### Analyses Spotify spécialisées
+- Corrélations entre caractéristiques audio (danceability, energy, acousticness, etc.)
+- Distributions des métriques audio par genre musical
+- Facteurs influençant la popularité des artistes et des chansons
+- Tendances temporelles des caractéristiques musicales
+- Exploration des différences entre genres musicaux
+- Analyse des artistes les plus populaires
 
 ## 📋 Prérequis
 
@@ -23,14 +31,14 @@ Ce framework d'analyse exploratoire permet de :
 
 1. Clonez ce dépôt :
 ```bash
-git clone https://github.com/votre-nom/data_exploration_project.git
-cd data_exploration_project
+git clone https://github.com/votre-nom/eda-music.git
+cd eda-music
 ```
 
 2. Créez un environnement virtuel (recommandé) :
 ```bash
-python -m venv env
-source env/bin/activate  # Sur Windows : env\Scripts\activate
+python -m venv venv
+source venv/bin/activate  # Sur Windows : venv\Scripts\activate
 ```
 
 3. Installez les dépendances :
@@ -45,20 +53,19 @@ pip install -e .
 
 ## 📊 Utilisation
 
-### En tant que module
+### Via le script d'analyse Spotify
 
-```python
-from src.analysis.explore_data import analyse_exploratoire
-import pandas as pd
+Le moyen le plus simple d'analyser le dataset Spotify est d'utiliser le script dédié :
 
-# Charger un dataset
-df = pd.read_csv("chemin/vers/votre/dataset.csv")
+```bash
+# Exécute l'analyse complète et sauvegarde les figures
+./run_spotify_analysis.sh
 
-# Lancer l'analyse complète
-analyse_exploratoire(df, titre="Analyse de mon dataset")
+# Alternativement, vous pouvez exécuter directement le script Python
+python spotify_analysis.py --save-figures
 ```
 
-### Pour l'analyse du dataset Spotify
+### En tant que module Python
 
 ```python
 from src.data.load_data import load_spotify
@@ -71,83 +78,91 @@ spotify_df = load_spotify()
 analyser_spotify_dataset(spotify_df)
 ```
 
-### Via les notebooks
+### Analyses personnalisées
+
+```python
+from src.data.load_data import load_spotify
+from src.analysis.spotify_analysis import (
+    analyser_correlations_audio,
+    analyser_par_genre,
+    analyser_popularite,
+    analyser_tendances_temporelles
+)
+
+# Charger le dataset
+df = load_spotify()
+
+# Analyser les corrélations entre caractéristiques audio
+figures_corr = analyser_correlations_audio(df)
+
+# Analyser les différences entre genres musicaux
+figures_genre, moyennes_par_genre = analyser_par_genre(df, n_genres=10)
+
+# Analyser les facteurs de popularité
+figures_pop = analyser_popularite(df)
+
+# Analyser l'évolution temporelle des caractéristiques musicales
+figures_temps = analyser_tendances_temporelles(df)
+```
+
+### Via les notebooks Jupyter
 
 1. Lancez Jupyter Notebook :
 ```bash
 jupyter notebook
 ```
 
-2. Naviguez vers le dossier `notebooks/` et ouvrez l'un des notebooks:
-   - `spotify_eda.ipynb` pour l'analyse des données Spotify
-   - Autres notebooks disponibles pour d'autres types d'analyse
-
-### Avec des datasets d'exemple
-
-```python
-# Exemple avec le dataset Iris
-from src.data.load_data import load_iris
-from src.analysis.explore_data import analyse_exploratoire
-
-# Charger le dataset Iris
-df = load_iris()
-
-# Lancer l'analyse complète
-analyse_exploratoire(df, titre="Analyse du dataset Iris")
-```
+2. Naviguez vers le dossier `notebooks/` et ouvrez `spotify_eda.ipynb` pour une analyse interactive complète.
 
 ## 📁 Structure du projet
 
 ```
-data_exploration_project/
+eda-music/
 ├── README.md                       # Documentation principale
 ├── requirements.txt                # Dépendances Python
+├── setup.py                        # Configuration du package
 ├── spotifydataset.csv              # Données Spotify
+├── spotify_analysis.py             # Script d'analyse principal
+├── run_spotify_analysis.sh         # Script shell d'automatisation
 ├── data/                           # Répertoire des données
 │   ├── raw/                        # Données brutes
 │   ├── processed/                  # Données nettoyées
-│   └── external/                   # Données externes
 ├── notebooks/                      # Jupyter notebooks
 │   └── spotify_eda.ipynb           # Notebook pour l'analyse Spotify
 ├── src/                            # Code source
 │   ├── data/                       # Scripts liés aux données
+│   │   └── load_data.py            # Fonctions de chargement
 │   ├── visualization/              # Scripts pour les visualisations
-│   └── analysis/                   # Scripts d'analyse
-│       └── spotify_analysis.py     # Module d'analyse spécifique à Spotify
+│   │   └── visualize.py            # Fonctions de visualisation
+│   ├── analysis/                   # Scripts d'analyse
+│   │   ├── explore_data.py         # Module d'analyse générique
+│   │   └── spotify_analysis.py     # Module d'analyse Spotify
 ├── reports/                        # Rapports générés
 │   └── figures/                    # Figures générées
+├── docs/                           # Documentation détaillée
+│   └── spotify_dataset.md          # Description du dataset Spotify
 └── tests/                          # Tests unitaires
 ```
 
-## 📈 Analyse du dataset Spotify
-
-Notre analyse du dataset Spotify comprend :
-
-- **Analyse des artistes** : Popularité, nombre de followers, genres associés
-- **Analyse des métriques audio** : Dansabilité, énergie, acoustique, etc.
-- **Analyse par genre musical** : Caractéristiques spécifiques à chaque genre
-- **Analyse de popularité** : Facteurs influençant la popularité des artistes et des chansons
-- **Analyse temporelle** : Évolution des caractéristiques musicales au fil du temps
-
-### Métriques audio analysées
+## 📊 Métriques audio analysées
 
 | Métrique | Description |
 |----------|-------------|
-| Danceability | Mesure l'aptitude du morceau à la danse (0.0 à 1.0) |
-| Energy | Mesure de l'intensité et de l'activité (0.0 à 1.0) |
+| Danceability | Aptitude du morceau à la danse (0.0 à 1.0) |
+| Energy | Intensité et activité perçues (0.0 à 1.0) |
 | Acousticness | Probabilité que le morceau soit acoustique (0.0 à 1.0) |
 | Valence | Positivité musicale du morceau (0.0 à 1.0) |
 | Instrumentalness | Probabilité d'absence de voix (0.0 à 1.0) |
 | Liveness | Détecte la présence d'un public (0.0 à 1.0) |
 | Speechiness | Présence de mots parlés (0.0 à 1.0) |
 | Tempo | Rythme estimé en BPM |
+| Loudness | Volume global en dB (-60 à 0) |
+| Key | Tonalité du morceau (0=C, 1=C#, etc.) |
+| Mode | Modalité (0=mineur, 1=majeur) |
 
-## 🔍 Datasets inclus et recommandés
+## 🔍 Autres datasets compatibles
 
-Le projet inclut:
-- **Spotify** : Données sur les artistes, chansons et caractéristiques audio (`spotifydataset.csv`)
-
-Et permet de charger automatiquement:
+Le projet permet également de charger automatiquement:
 - [Iris](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv) : Classification de fleurs
 - [Titanic](https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv) : Survie des passagers du Titanic
 - [Tips](https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv) : Données sur les pourboires au restaurant

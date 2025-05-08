@@ -4,6 +4,10 @@
 
 Ce dataset contient des informations sur des artistes, des chansons, et leurs caractéristiques audio sur Spotify. Il permet d'analyser les tendances musicales, les caractéristiques des genres et les facteurs qui influencent la popularité.
 
+## Structure et contenu
+
+Le fichier `spotifydataset.csv` contient environ 1000 lignes, chacune représentant une chanson avec ses métadonnées d'artiste et ses caractéristiques audio.
+
 ## Colonnes
 
 | Colonne | Type | Description |
@@ -68,26 +72,107 @@ Tempo estimé d'une piste en battements par minute (BPM).
 
 ## Utilisation avec notre Framework
 
-Notre framework d'analyse exploratoire permet d'analyser facilement ce dataset avec des fonctions dédiées :
+### Chargement des données
 
 ```python
 from src.data.load_data import load_spotify
-from src.analysis.spotify_analysis import analyser_spotify_dataset
 
 # Charger le dataset
 spotify_df = load_spotify()
+
+# Afficher les informations de base
+print(f"Dimensions: {spotify_df.shape}")
+print(spotify_df.info())
+spotify_df.head()
+```
+
+### Analyse complète
+
+```python
+from src.analysis.spotify_analysis import analyser_spotify_dataset
 
 # Lancer l'analyse complète
 analyser_spotify_dataset(spotify_df)
 ```
 
-Pour une analyse visuelle plus poussée:
+### Analyses spécifiques
 
 ```python
-from src.visualization.visualize import create_report_figures
+from src.analysis.spotify_analysis import (
+    analyser_correlations_audio,
+    analyser_par_genre,
+    analyser_popularite,
+    analyser_distribution_audio,
+    analyser_tendances_temporelles,
+    analyser_top_artistes
+)
 
-# Générer toutes les figures d'analyse
+# Analyse des corrélations entre caractéristiques audio
+figures_corr = analyser_correlations_audio(spotify_df)
+
+# Analyse par genre musical
+figures_genre, moyennes_par_genre = analyser_par_genre(spotify_df, n_genres=15)
+
+# Analyse de popularité
+figures_pop = analyser_popularite(spotify_df)
+
+# Analyse de la distribution des caractéristiques audio
+figures_dist = analyser_distribution_audio(spotify_df)
+
+# Analyse des tendances temporelles
+figures_temps = analyser_tendances_temporelles(spotify_df)
+
+# Analyse des artistes les plus populaires
+figures_artistes = analyser_top_artistes(spotify_df, n_artistes=10)
+```
+
+### Visualisations avancées
+
+```python
+from src.visualization.visualize import (
+    spotify_feature_distribution,
+    spotify_correlation_heatmap,
+    spotify_genre_comparison,
+    spotify_artist_popularity_viz,
+    temporal_analysis_plot,
+    popularity_vs_feature_scatter,
+    create_report_figures
+)
+
+# Créer une visualisation de distribution pour une caractéristique
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(figsize=(10, 6))
+spotify_feature_distribution(spotify_df, 'danceability', ax=ax)
+plt.show()
+
+# Créer une matrice de corrélation
+correlation_fig = spotify_correlation_heatmap(spotify_df)
+plt.show()
+
+# Générer toutes les figures d'analyse et les sauvegarder
 create_report_figures(spotify_df, "reports/figures")
+```
+
+## Script d'analyse automatisée
+
+Le projet inclut un script d'analyse automatisée qui peut être exécuté facilement :
+
+```bash
+# Exécuter le script shell qui automatise l'analyse complète
+./run_spotify_analysis.sh
+
+# Ou exécuter directement le script Python
+python spotify_analysis.py --save-figures --output-dir reports/figures
+```
+
+Options disponibles pour le script `spotify_analysis.py` :
+
+```
+--output-dir        Répertoire où sauvegarder les figures (défaut: reports/figures)
+--save-figures      Activer la sauvegarde des figures générées
+--top-artists       Nombre des artistes les plus populaires à analyser (défaut: 15)
+--top-genres        Nombre des genres les plus populaires à analyser (défaut: 15)
+--no-display        Désactiver l'affichage des figures (utile pour les serveurs)
 ```
 
 ## Exemples d'Analyses Possibles
@@ -96,4 +181,5 @@ create_report_figures(spotify_df, "reports/figures")
 2. **Facteurs de popularité** : Identifier les caractéristiques audio qui corrèlent le plus avec la popularité
 3. **Évolution temporelle** : Observer comment les tendances musicales ont évolué au fil des années
 4. **Profils d'artistes** : Comparer les caractéristiques des artistes les plus populaires
-5. **Analyse des paroles explicites** : Étudier l'impact du contenu explicite sur la popularité 
+5. **Analyse des paroles explicites** : Étudier l'impact du contenu explicite sur la popularité
+6. **Clustering des chansons** : Regrouper les chansons selon leurs caractéristiques audio pour découvrir des niches musicales 

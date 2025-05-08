@@ -1,5 +1,28 @@
 """
 Module d'analyse spécifique au dataset Spotify
+
+Ce module contient des fonctions spécialisées pour l'analyse des données musicales
+provenant de Spotify. Il permet d'explorer les caractéristiques audio, les relations
+entre genres musicaux, les facteurs de popularité, et les tendances temporelles.
+
+Fonctions principales:
+- analyser_correlations_audio: Analyse les corrélations entre métriques audio
+- analyser_par_genre: Analyse les caractéristiques audio par genre musical
+- analyser_popularite: Analyse les facteurs liés à la popularité des artistes/chansons
+- analyser_distribution_audio: Analyse la distribution des caractéristiques audio
+- analyser_tendances_temporelles: Analyse l'évolution des caractéristiques dans le temps
+- analyser_top_artistes: Identifie et analyse les artistes les plus populaires
+- analyser_spotify_dataset: Point d'entrée principal pour l'analyse complète
+
+Utilisation:
+    from src.data.load_data import load_spotify
+    from src.analysis.spotify_analysis import analyser_spotify_dataset
+    
+    # Charger les données
+    df = load_spotify()
+    
+    # Exécuter l'analyse complète
+    analyser_spotify_dataset(df)
 """
 
 import pandas as pd

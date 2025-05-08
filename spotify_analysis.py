@@ -1,6 +1,37 @@
 #!/usr/bin/env python3
 """
 Script pour exécuter l'analyse du dataset Spotify
+
+Ce script est l'interface principale pour l'analyse des données Spotify. Il permet d'effectuer 
+une analyse complète des caractéristiques audio, artistes, genres et tendances dans le dataset.
+
+Fonctionnalités:
+- Analyse des corrélations entre caractéristiques audio (danceability, energy, etc.)
+- Analyse des genres musicaux et leurs caractéristiques distinctives
+- Analyse des facteurs de popularité des artistes et des chansons
+- Analyse des distributions des caractéristiques audio
+- Analyse des tendances temporelles dans les données musicales
+- Visualisation des artistes les plus populaires
+
+Utilisation:
+    python spotify_analysis.py [options]
+
+Options:
+    --output-dir DIR     Répertoire où sauvegarder les figures (défaut: reports/figures)
+    --save-figures       Activer la sauvegarde des figures générées
+    --top-artists N      Nombre des artistes les plus populaires à analyser (défaut: 15)
+    --top-genres N       Nombre des genres les plus populaires à analyser (défaut: 15)
+    --no-display         Désactiver l'affichage des figures (utile pour les environnements sans interface graphique)
+
+Exemples:
+    # Exécuter l'analyse complète avec affichage des figures
+    python spotify_analysis.py
+    
+    # Exécuter l'analyse et sauvegarder les figures dans un répertoire personnalisé
+    python spotify_analysis.py --save-figures --output-dir mes_resultats/figures
+    
+    # Exécuter l'analyse en mode serveur (sans affichage)
+    python spotify_analysis.py --no-display --save-figures
 """
 
 import argparse

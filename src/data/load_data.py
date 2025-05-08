@@ -59,8 +59,28 @@ def load_spotify() -> pd.DataFrame:
     """
     Charge le dataset Spotify avec des informations sur les artistes et les chansons.
     
+    Cette fonction recherche le fichier spotifydataset.csv à la racine du projet et le charge
+    en tant que DataFrame pandas. Le dataset contient des informations sur les artistes, chansons,
+    et caractéristiques audio comme la danceability, energy, tempo, etc.
+    
     Returns:
-        DataFrame pandas contenant les données Spotify
+        DataFrame pandas contenant les données Spotify avec les colonnes suivantes:
+        - artist_name: Nom de l'artiste
+        - genres: Liste des genres associés à l'artiste (format texte)
+        - followers: Nombre d'abonnés de l'artiste
+        - artist_popularity: Score de popularité de l'artiste (0-100)
+        - track_name: Nom de la chanson
+        - album_name: Nom de l'album
+        - release_date: Date de sortie de l'album
+        - plus diverses caractéristiques audio (danceability, energy, etc.)
+    
+    Raises:
+        FileNotFoundError: Si le fichier spotifydataset.csv n'est pas trouvé
+    
+    Example:
+        >>> df = load_spotify()
+        >>> print(f"Nombre d'artistes: {df['artist_name'].nunique()}")
+        >>> print(f"Caractéristiques disponibles: {df.columns.tolist()}")
     """
     # Utiliser le chemin relatif au projet
     root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
