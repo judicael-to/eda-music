@@ -1,6 +1,10 @@
 # Projet d'Analyse Exploratoire de Données Musicales
 
+[![Website](https://img.shields.io/badge/Website-View%20Demo-blue)](https://votre-nom.github.io/eda-music/)
+
 Ce projet fournit un framework complet pour réaliser des analyses exploratoires de données (EDA) sur des datasets musicaux, notamment Spotify, en utilisant Python avec pandas, matplotlib et seaborn.
+
+🌐 **[Voir la démonstration en ligne](https://votre-nom.github.io/eda-music/)**
 
 ## 🌟 Fonctionnalités
 
