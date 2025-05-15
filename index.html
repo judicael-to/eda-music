@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse Exploratoire de Données Musicales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a8a4e6;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-box {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        code {
+            background-color: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1 class="display-4">Analyse Exploratoire de Données Musicales</h1>
+            <p class="lead">Un framework Python pour analyser les données Spotify et découvrir des insights musicaux</p>
+            <a href="https://github.com/votre-nom/eda-music" class="btn btn-light btn-lg">Voir sur GitHub</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Features Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Fonctionnalités</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Analyse Audio</h5>
+                            <p class="card-text">Analysez les caractéristiques audio comme la danceability, l'energy et le tempo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Analyse par Genre</h5>
+                            <p class="card-text">Explorez les différences entre genres musicaux et leurs caractéristiques distinctives.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Visualisations</h5>
+                            <p class="card-text">Générez des visualisations interactives et des rapports détaillés.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Installation</h2>
+            <div class="bg-light p-4 rounded">
+                <pre><code>git clone https://github.com/votre-nom/eda-music.git
+cd eda-music
+python -m venv venv
+source venv/bin/activate  # Sur Windows : venv\Scripts\activate
+pip install -r requirements.txt</code></pre>
+            </div>
+        </section>
+
+        <!-- Usage Example Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Exemple d'Utilisation</h2>
+            <div class="bg-light p-4 rounded">
+                <pre><code>from src.data.load_data import load_spotify
+from src.analysis.spotify_analysis import analyser_spotify_dataset
+
+# Charger le dataset
+df = load_spotify()
+
+# Lancer l'analyse complète
+analyser_spotify_dataset(df)</code></pre>
+            </div>
+        </section>
+
+        <!-- Metrics Section -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4">Métriques Analysées</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="metric-box">
+                        <div class="metric-value">1000+</div>
+                        <div>Chansons analysées</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-box">
+                        <div class="metric-value">13</div>
+                        <div>Caractéristiques audio</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-box">
+                        <div class="metric-value">50+</div>
+                        <div>Genres musicaux</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-box">
+                        <div class="metric-value">6</div>
+                        <div>Types de visualisations</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-4 mt-5">
+        <div class="container text-center">
+            <p>Créé avec ❤️ pour l'analyse de données musicales</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
